@@ -46,6 +46,7 @@ $params = $params.'&redirect='.$redirect;
 if (isset($_GET['location'])) {
   list($wlan, $switch_url) = explode("?", $_GET['location']);
   $params = $params.'&wlan='.$wlan;
+  $params = $params.'&switch_url='.$switch_url;
 }
 $is_hq_wifi = strtolower($wlan) === strtolower('CA-HQ-GUEST');
 
