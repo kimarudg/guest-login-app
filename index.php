@@ -89,7 +89,7 @@ if (isset($_GET['statusCode'])) {
   <head>
     <base href="./">
     <meta charset="utf-8">
-    <title>Web Authentication <?php echo $is_hq_wifi; ?></title>
+    <title>Web Authentication</title>
     <link href="css/style.css" rel="stylesheet">
   </head>
   <body class="c-app flex-row align-items-center">
@@ -104,7 +104,6 @@ if (isset($_GET['statusCode'])) {
               <div class="card-body">
                 <h1>Login</h1>
                 <p class="text-muted">Sign In to your account</p>
-                <p><?php echo $actual_link; ?></p>
                 <?php if ($statusMessage) echo "<p class=\"alert\"><i class=\"fa fa-warning\"></i> {$statusMessage}</p>"; ?>
                 <form action="<?php echo $switch_url; ?>" method="post" id="login-form">
                   <div class="input-group mb-3">
