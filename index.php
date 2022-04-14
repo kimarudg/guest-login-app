@@ -109,7 +109,7 @@ if (isset($_GET['statusCode'])) {
                     </div>
                     <?php if($is_hq_wifi){ ?>
                     <div class="col-12 text-right">
-                      <a href="/web/?actual=<?php echo $actual_link; ?>" class="btn btn-link col-12" type="button">Create Account</a>
+                      <a href="web/?actual=<?php echo $actual_link; ?>" class="btn btn-link col-12" type="button">Create Account</a>
                     </div>
                     <?php } else { ?>
                       <div class="col-12 text-right">
