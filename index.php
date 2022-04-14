@@ -86,6 +86,8 @@ if (isset($_GET['statusCode'])) {
               <div class="card-body">
                 <h1>Login</h1>
                 <p class="text-muted">Sign In to your account</p>
+                <p><?php echo $actual_link; ?></p>
+                <hr />
                 <?php if ($statusMessage) echo "<p class=\"alert\"><i class=\"fa fa-warning\"></i> {$statusMessage}</p>"; ?>
                 <form action="<?php echo $switch_url; ?>" method="post" id="login-form">
                   <div class="input-group mb-3">
