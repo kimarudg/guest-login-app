@@ -6,6 +6,9 @@ if (isset($_GET['switch_url'])){
   $switch_url = '';
 }
 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$server = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+$all_parameters = $_GET;
+
 
 $params = 'switch_url='.$switch_url;
 
@@ -25,13 +28,13 @@ if (isset($_GET['client_mac'])){
 $params = $params.'&client_mac='.$client_mac;
 if (isset($_GET['wlan'])){
   $wlan = $_GET['wlan'];
-  $is_hq_wifi = strtolower($wlan) === strtolower('CA-HQ-GUEST');
+  $params = $params.'&wlan='.$wlan;
 } else {
   $wlan = '';
   $is_hq_wifi = false;
 }
 
-$params = $params.'&wlan='.$wlan;
+
 
 if(isset($_GET['redirect'])){
   $redirect = $_GET['redirect'];
@@ -39,6 +42,13 @@ if(isset($_GET['redirect'])){
   $redirect = '';
 }
 $params = $params.'&redirect='.$redirect;
+
+if (isset($_GET['location'])) {
+  list($wlan, $switch_url) = explode("?", $_GET['location']);
+  $params = $params.'&wlan='.$wlan;
+}
+$is_hq_wifi = strtolower($wlan) === strtolower('CA-HQ-GUEST');
+
 
 
 if (isset($_GET['statusCode'])) {
@@ -86,8 +96,6 @@ if (isset($_GET['statusCode'])) {
               <div class="card-body">
                 <h1>Login</h1>
                 <p class="text-muted">Sign In to your account</p>
-                <p><?php echo $actual_link; ?></p>
-                <hr />
                 <?php if ($statusMessage) echo "<p class=\"alert\"><i class=\"fa fa-warning\"></i> {$statusMessage}</p>"; ?>
                 <form action="<?php echo $switch_url; ?>" method="post" id="login-form">
                   <div class="input-group mb-3">
@@ -111,7 +119,7 @@ if (isset($_GET['statusCode'])) {
                     </div>
                     <?php if($is_hq_wifi){ ?>
                     <div class="col-12 text-right">
-                      <a href="web/?actual=<?php echo $actual_link; ?>" class="btn btn-link col-12" type="button">Create Account</a>
+                      <a href="web/?actual=<?php echo $server.'?'.$params; ?>" class="btn btn-link col-12" type="button">Create Account</a>
                     </div>
                     <?php } else { ?>
                       <div class="col-12 text-right">
