@@ -48,7 +48,14 @@ if (isset($_GET['location'])) {
   $params = $params.'&wlan='.$wlan;
   $params = $params.'&switch_url='.$switch_url;
 }
-$is_hq_wifi = strtolower($wlan) === strtolower('CA-HQ-GUEST');
+// $is_hq_wifi = strtolower($wlan) === strtolower('CA-HQ-GUEST');
+
+
+if(strpos($actual_link, 'hq') !== false){
+  $is_hq_wifi = true;
+} else {
+  $is_hq_wifi = false;
+}
 
 
 
@@ -82,7 +89,7 @@ if (isset($_GET['statusCode'])) {
   <head>
     <base href="./">
     <meta charset="utf-8">
-    <title>Web Authentication</title>
+    <title>Web Authentication <?php echo $is_hq_wifi; ?></title>
     <link href="css/style.css" rel="stylesheet">
   </head>
   <body class="c-app flex-row align-items-center">
@@ -97,6 +104,7 @@ if (isset($_GET['statusCode'])) {
               <div class="card-body">
                 <h1>Login</h1>
                 <p class="text-muted">Sign In to your account</p>
+                <p><?php echo $actual_link; ?></p>
                 <?php if ($statusMessage) echo "<p class=\"alert\"><i class=\"fa fa-warning\"></i> {$statusMessage}</p>"; ?>
                 <form action="<?php echo $switch_url; ?>" method="post" id="login-form">
                   <div class="input-group mb-3">
@@ -120,7 +128,7 @@ if (isset($_GET['statusCode'])) {
                     </div>
                     <?php if($is_hq_wifi){ ?>
                     <div class="col-12 text-right">
-                      <a href="web/?actual=<?php echo $server.'/login?'.$params; ?>" class="btn btn-link col-12" type="button">Create Account</a>
+                      <a href="web/?actual=<?php echo $actual_link; ?>" class="btn btn-link col-12" type="button">Create Account</a>
                     </div>
                     <?php } else { ?>
                       <div class="col-12 text-right">
