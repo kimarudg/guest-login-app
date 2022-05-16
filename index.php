@@ -48,10 +48,8 @@ if (isset($_GET['location'])) {
   $params = $params.'&wlan='.$wlan;
   $params = $params.'&switch_url='.$switch_url;
 }
-// $is_hq_wifi = strtolower($wlan) === strtolower('CA-HQ-GUEST');
 
-
-if(strpos($actual_link, 'hq') !== false){
+if(strpos($actual_link, 'hq') !== false or  strtolower($wlan) === strtolower('CA-GUEST')){
   $is_hq_wifi = true;
 } else {
   $is_hq_wifi = false;
@@ -126,8 +124,11 @@ if (isset($_GET['statusCode'])) {
                       <input class="btn btn-primary col-12" type="submit" value="Log in" />
                     </div>
                     <?php if($is_hq_wifi){ ?>
-                    <div class="col-12 text-right">
-                      <a href="web/?actual=<?php echo $actual_link; ?>" class="btn btn-link col-12" type="button">Create Account</a>
+                    <div class="col-12 zero-padding">
+                      <a href="http://guestwifiregister.ca.go.ke/register?actual=<?php echo $actual_link; ?>" class="btn btn-link col-12" type="button">Create Account</a>
+                    </div>
+                    <div class="col-12 zero-padding">
+                      <a href="http://guestwifiregister.ca.go.ke/request-otp?actual=<?php echo $actual_link; ?>" class="btn btn-link col-12" type="button">Already registered?</a>
                     </div>
                     <?php } else { ?>
                       <div class="col-12 text-right">
